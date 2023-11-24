@@ -4,7 +4,8 @@ While trying to make WSL Kali more palatable, these scripts will create or destr
 
 To execute from an elevated Powershell prompt on the WSL host machine:
 
-powershell.exe -File "C:\Path\To\Script\Bridge-WslPorts.ps1"
-powershell.exe -File "C:\Path\To\Script\Unbridge-WslPorts.ps1"
+`powershell.exe -File "C:\Path\To\Script\Bridge-WslPorts.ps1"`
+
+`powershell.exe -File "C:\Path\To\Script\Unbridge-WslPorts.ps1"`
 
 Idea stolen from https://jwstanly.com/blog/article/Port+Forwarding+WSL+2+to+Your+LAN
