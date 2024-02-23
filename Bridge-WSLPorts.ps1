@@ -14,13 +14,13 @@ else {
 $listenAddress = '0.0.0.0';      # <--- May want to limit this
 
 foreach ($port in $ports) {
-  Write-Host "[*] Adding portproxy rule for $listenAddress\:$port" -ForegroundColor Green
+  Write-Host -NoNewline "[*] Adding portproxy rule for $listenAddress\:$port" -ForegroundColor Green
   Invoke-Expression "netsh interface portproxy add v4tov4 listenport=$port listenaddress=$listenAddress connectport=$port connectaddress=$wslAddress";
 }
 
 $fireWallDisplayName = 'WSLPortForwarding';
 $portsStr = $ports -join ",";
 
-Write-Host "[*] Adding host firewall rule to allow outbound and inbound traffic on ports $portsStr" -ForegroundColor Green
+Write-Host -NoNewline "[*] Adding host firewall rule to allow outbound and inbound traffic on ports $portsStr" -ForegroundColor Green
 Invoke-Expression "New-NetFireWallRule -DisplayName $fireWallDisplayName -Direction Outbound -LocalPort $portsStr -Action Allow -Protocol TCP";
 Invoke-Expression "New-NetFireWallRule -DisplayName $fireWallDisplayName -Direction Inbound -LocalPort $portsStr -Action Allow -Protocol TCP";
