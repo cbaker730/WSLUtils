@@ -14,14 +14,14 @@ else {
 $listenAddress = '0.0.0.0';      # <--- If you limited this address when the bridge was created, change it here too
 
 foreach ($port in $ports) {
-  Write-Host "[*] Removing portproxy rule for $listenAddress\:$port" -ForegroundColor Green
+  Write-Host -NoNewline "[*] Removing portproxy rule for $listenAddress\:$port" -ForegroundColor Green
   Invoke-Expression "netsh interface portproxy delete v4tov4 listenport=$port listenaddress=$listenAddress";
 }
 
 $fireWallDisplayName = 'WSLPortForwarding';
 $portsStr = $ports -join ",";
 
-Write-Host "[*] Removing host firewall rule $fireWallDisplayName to disallow outbound and inbound traffic on ports $portsStr" -ForegroundColor Green
+Write-Host -NoNewline "[*] Removing host firewall rule $fireWallDisplayName to disallow outbound and inbound traffic on ports $portsStr" -ForegroundColor Green
 Invoke-Expression "Remove-NetFireWallRule -DisplayName $fireWallDisplayName";
 
 Invoke-Expression "netsh interface portproxy show v4tov4";
